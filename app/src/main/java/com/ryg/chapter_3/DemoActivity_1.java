@@ -1,13 +1,18 @@
 package com.ryg.chapter_3;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
 import com.ryg.chapter_3.R;
+import com.ryg.chapter_3.adapter.GroupChatCrossCardAdapter;
 import com.ryg.chapter_3.ui.HorizontalScrollViewEx;
 import com.ryg.chapter_3.utils.MyUtils;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,23 +55,15 @@ public class DemoActivity_1 extends Activity {
     }
 
     private void createList(ViewGroup layout) {
-        ListView listView = (ListView) layout.findViewById(R.id.list);
+        RecyclerView listView = layout.findViewById(R.id.list);
         ArrayList<String> datas = new ArrayList<String>();
         for (int i = 0; i < 50; i++) {
             datas.add("name " + i);
         }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.content_list_item, R.id.name, datas);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
-                Toast.makeText(DemoActivity_1.this, "click item",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        GroupChatCrossCardAdapter groupChatCrossCardAdapter = new GroupChatCrossCardAdapter(this);
+        listView.setAdapter(groupChatCrossCardAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        listView.setLayoutManager(linearLayoutManager);
     }
 }

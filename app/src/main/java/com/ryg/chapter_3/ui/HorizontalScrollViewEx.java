@@ -65,10 +65,18 @@ public class HorizontalScrollViewEx extends ViewGroup {
         case MotionEvent.ACTION_MOVE: {
             int deltaX = x - mLastXIntercept;
             int deltaY = y - mLastYIntercept;
-            if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                intercepted = true;
-            } else {
+            Log.e(TAG, "onInterceptTouchEvent: event"+event.getAction());
+
+            if (Math.abs(deltaX) >= Math.abs(deltaY)) {
+                Log.e(TAG, "onInterceptTouchEventfalse: Math.abs(deltaX)"+Math.abs(deltaX));
+                Log.e(TAG, "onInterceptTouchEventfalse: Math.abs(deltaX)"+Math.abs(deltaX));
+                Log.e(TAG, "onInterceptTouchEventfalse: false");
                 intercepted = false;
+            } else {
+                Log.e(TAG, "onInterceptTouchEventtrue: Math.abs(deltaX)"+Math.abs(deltaX));
+                Log.e(TAG, "onInterceptTouchEventtrue: Math.abs(deltaX)"+Math.abs(deltaX));
+                Log.e(TAG, "onInterceptTouchEventtrue: true");
+               intercepted = true;
             }
             break;
         }
@@ -104,6 +112,7 @@ public class HorizontalScrollViewEx extends ViewGroup {
         case MotionEvent.ACTION_MOVE: {
             int deltaX = x - mLastX;
             int deltaY = y - mLastY;
+            Log.e(TAG, "onTouchEvent: event"+deltaX);
             scrollBy(-deltaX, 0);
             break;
         }
